@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Carta de Amor</title>
+    <style>
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes rainbowText {
+            0% { color: red; }
+            16% { color: orange; }
+            32% { color: yellow; }
+            48% { color: green; }
+            64% { color: blue; }
+            80% { color: indigo; }
+            100% { color: violet; }
+        }
+        body {
+            font-family: 'Courier New', monospace;
+            margin: 0;
+            padding: 20px;
+            background-image: url('carta_fondo_opt.png');
+            background-size: cover;
+            background-position: center;
+            text-align: center;
+        }
+        .carta {
+            max-width: 700px;
+            margin: auto;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            line-height: 1.6;
+            animation: fadeIn 1s ease-out;
+            position: relative;
+        }
+        button {
+            background-color: #ff6f91;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 5px;
+            position: relative;
+        }
+        .respuesta {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-top: 20px;
+            animation: rainbowText 4s infinite alternate;
+        }
+        .firma {
+            margin-top: 40px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <audio id="musica" autoplay loop>
+        <source src="tu-audio.mp3" type="audio/mpeg">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
+
+    <div class="carta">
+        <div class="encabezado">
+            En algún lugar del corazón,<br />
+            18 de mayo de 2025
+        </div>
+
+        <div class="destinatario">
+            Para: Jacquelin<br />
+        </div>
+
+        <div class="cuerpo">
+            <div class="respuesta">
+                🌹 **Un Poema Para Ti** 🌹<br /><br />
+                En el susurro de la brisa,<br />
+                en cada rayo de sol naciente,<br />
+                hay un reflejo de tu sonrisa,<br />
+                dulce y mágica, tan reluciente.<br /><br />
+
+                En las estrellas dejo mis sueños,<br />
+                esperando que los descubras,<br />
+                cada palabra lleva mi empeño,<br />
+                en esta carta que hoy inauguras.<br /><br />
+
+                Eres la luz en mi sendero,<br />
+                la melodía en mis días grises,<br />
+                en ti encuentro un amor sincero,<br />
+                más fuerte que miles raíces.<br /><br />
+            </div>
+
+            **¿Quieres ser mi novia?** 💖<br /><br />
+            <button onclick="respuesta('si')">Sí ❤️</button>
+            <button id="boton-no" onclick="respuesta('no')">No 😢</button>
+
+            <br /><br />
+            <div id="mensaje-respuesta" class="respuesta"></div>
+            <br />
+            Siempre tuyo,
+        </div>
+
+        <div class="firma">
+            David
+        </div>
+    </div>
+
+    <script>
+        let intentos = 0;
+
+        function respuesta(opcion) {
+            let mensaje = document.getElementById("mensaje-respuesta");
+            let botonNo = document.getElementById("boton-no");
+
+            if (opcion === 'si') {
+                mensaje.innerHTML = `
+                    🌹 ¡Gracias por aceptar! ❤️ 🌹 <br><br>
+                    Como el sol besa la aurora,<br />
+                    mi corazón te entrego,<br />
+                    en cada instante que atesoro,<br />
+                    en cada suspiro sincero.<br /><br />
+
+                    Te prometo días de alegría,<br />
+                    noches llenas de ternura,<br />
+                    porque en ti encontré mi vida,<br />
+                    y en tu amor mi aventura. 💖
+                `;
+            } else {
+                if (intentos < 4) {
+                    botonNo.style.position = "absolute";
+                    botonNo.style.left = Math.random() * 80 + "vw";
+                    botonNo.style.top = Math.random() * 80 + "vh";
+                    intentos++;
+                } else {
+                    botonNo.style.display = "none";
+                    mensaje.innerHTML = `Está bien, lo entiendo 😊`;
+                }
+            }
+        }
+
+        window.onload = function() {
+            document.getElementById("musica").muted = false;
+        };
+    </script>
+
+</body>
+</html>
